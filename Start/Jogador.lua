@@ -1,14 +1,7 @@
-require "com.jessewarden.statemachine.StateMachine"
-require "estados.AtivoState"
-require "estados.MovendoState"
-require "estados.CorrendoDireitaState"
-require "estados.AtacandoState"
+local StateMachine = require "StateMachine"
 
-Jogador = {}
-
-function Jogador:new()
-
-	local jogador = display.newGroup()	
+local Jogador = {}
+function Jogador.new()
 
 	local options = {
 		width = 45,
@@ -21,29 +14,28 @@ function Jogador:new()
 		{ name = "correndo", start=1, count=11, time=500},
 		{ name = "pulando", start=11, count=3,  time=900}
 	}
-	local spriteSheet =  graphics.newImageSheet("zero2.png", options)
-	local sprite = display.newSprite(spriteSheet, sequenceData)
+	local spriteSheet = graphics.newImageSheet("zero2.png", options)
 	
-	jogador.velocidade = 3
-	jogador.estadoSprite = nil
-	jogador.sheet = spriteSheet
-	jogador.sprite = sprite
-	
-	
-	local fsm = StateMachine:new(jogador)
-	jogador.fsm = fsm
-	fsm:addState2(AtivoState:new())	
-	fsm:addState2(CorrendoDireitaState:new())
-	fsm:addState2(AtacandoState:new())	
-	
-	function jogador:inserir()
-		jogador.sprite.x = 50; jogador.sprite.y = 50
-		jogador.sprite:setSequence("parado")
-		jogador.sprite:play()
+	novoJogador = display.newSprite(spriteSheet, sequenceData)	
+	novoJogador.velocidade = 2	
+	novoJogador.yInicial = nil	
+	novoJogador.name = "jogador"
+	novoJogador.health = 100
+	novoJogador.attackPower = 10	
+	novoJogador.fsm = StateMachine.new(novoJogador)	
+	novoJogador.fsm:active()
+
+	function novoJogador:inserir()
+		self.x = 50; self.y = 50
 	end
+
+	function novoJogador:getName()
+		return self.name
+	end	
 	
 	
-	
-	return jogador
-end
+	return novoJogador
+end		
+
+
 return Jogador

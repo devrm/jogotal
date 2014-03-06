@@ -4,7 +4,7 @@ fundo.x = 285; fundo.y = 160
 local chao = display.newImage("ground.png")
 chao.x = 0; chao.y = 320
 
-physics.addBody(chao, "static", {friction=0.5, bounce=0})
+physics.addBody(chao, "static", {friction=0.0, bounce=0})
 
 
 local paredeEsquerda = display.newRect(0,0,1,display.contentHeight)

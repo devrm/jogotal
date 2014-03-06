@@ -1,0 +1,46 @@
+require "StateMachine"
+
+local Jogador = {}
+Jogador.__index = Jogador
+function Jogador:new()
+	local self = setemetatable({}, Jogador)
+	self.value = init
+	return self
+	local jogador = display.newGroup()
+		
+	local options = {
+		width = 45,
+		height = 45,
+		numFrames = 14
+	}
+
+	local sequenceData = {
+		{ name = "parado", start=1, count=1, time=0,   loopCount=1 },
+		{ name = "correndo", start=1, count=11, time=500},
+		{ name = "pulando", start=11, count=3,  time=900}
+	}
+	local spriteSheet =  graphics.newImageSheet("zero2.png", options)
+	local sprite = display.newSprite(spriteSheet, sequenceData)
+	
+	--groupPlayer:insert(sprite)
+	jogador.velocidade = 2
+	jogador.estadoSprite = nil
+	jogador.yInicial = nil
+	jogador.sheet = spriteSheet
+	jogador.sprite = sprite	
+	jogador.health = 100
+	jogador.attackPower = 10
+	local fsm = StateMachine:new(jogador)
+	jogador.fsm = fsm
+	
+	function jogador:inserir()
+		jogador.sprite.x = 50; jogador.sprite.y = 50
+	end
+	
+	function jogador:getName()
+		return jogador.name
+	end
+	
+	return jogador
+end
+return Jogador

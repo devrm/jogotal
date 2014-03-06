@@ -37,7 +37,7 @@ function GameSprite:adicionarColisao(nome, funcaoColisao)
 	self.sprite:addEventListener(nome, self.sprite)
 end
 function GameSprite:acao()	
-	self.estadoSprite:executarAcao(self)
+	--self.estadoSprite:executarAcao(self)
 end
 
 function GameSprite:test()
@@ -53,16 +53,16 @@ function EstadoSprite:new(o)
 	return o
 end
 function EstadoSprite:pular(gameSprite)
-	print("pulando")
+	--print("pulando")
 end
 function EstadoSprite:correr(gameSprite)
-	print("correndo")
+	--print("correndo")
 end
 function EstadoSprite:parar(gameSprite)
-	print("parado")
+	--print("parado")
 end
 function EstadoSprite:executarAcao(gameSprite)
-	print("executando acao generica")
+	--print("executando acao generica")
 end
 
 EstadoParado = {}
@@ -75,7 +75,7 @@ end
 function EstadoParado:executarAcao(gameSprite)
 	gameSprite.sprite:pause()
 	gameSprite.sprite:setFrame(1)
-	print("acao parado")
+	--print("acao parado")
 end
 function EstadoParado:correr(gameSprite)
 	gameSprite.estadoSprite = EstadoCorrendo:new()	
@@ -92,7 +92,7 @@ function EstadoCorrendo:new(o)
 	return o	
 end
 function EstadoCorrendo:executarAcao(gameSprite)	
-	print("correndo")
+	--print("correndo")
 end
 function EstadoCorrendo:parar(gameSprite)
 	gameSprite.estadoSprite = EstadoParado:new()	
